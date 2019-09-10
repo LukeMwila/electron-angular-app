@@ -1,0 +1,97 @@
+{
+  "name": "electron-app",
+  "version": "0.0.0",
+  "main": "main.js",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "jest",
+    "pretty": "prettier --write --tab-width 4 \"src/**/*.js\"",
+    "precommit": "lint-staged",
+    "test:coverage": "jest --coverage",
+    "lint": "ng lint",
+    "electron": "ng build && electron ."
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run pretty",
+      "npm run lint",
+      "git add"
+    ],
+    "src/**/*.ts": [
+      "pretty-quick --staged",
+      "tslint --fix --config tslint.json --project tsconfig.json",
+      "git add"
+    ]
+  },
+  "private": true,
+  "jest": {
+    "preset": "jest-preset-angular",
+    "setupFilesAfterEnv": [
+      "<rootDir>/setupJest.ts"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/dist/",
+      "<rootDir>/src/test.ts",
+      "<rootDir>/cypress/"
+    ],
+    "coverageThreshold": {
+      "./src/app/tests/unit/": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      },
+      "./src/app/components/": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "<rootDir>/tsconfig.spec.json",
+        "stringifyContentPathRegex": "\\.html$",
+        "astTransformers": [
+          "<rootDir>/node_modules/jest-preset-angular/InlineHtmlStripStylesTransformer"
+        ]
+      }
+    }
+  },
+  "dependencies": {
+    "@angular/animations": "~8.1.1",
+    "@angular/common": "~8.1.1",
+    "@angular/compiler": "~8.1.1",
+    "@angular/core": "~8.1.1",
+    "@angular/forms": "~8.1.1",
+    "@angular/platform-browser": "~8.1.1",
+    "@angular/platform-browser-dynamic": "~8.1.1",
+    "@angular/router": "~8.1.1",
+    "rxjs": "~6.4.0",
+    "tslib": "^1.9.0",
+    "zone.js": "~0.9.1"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.801.1",
+    "@angular/cli": "~8.1.1",
+    "@angular/compiler-cli": "~8.1.1",
+    "@angular/language-service": "~8.1.1",
+    "@types/node": "~8.9.4",
+    "@types/jest": "^24.0.17",
+    "codelyzer": "^5.0.0",
+    "electron": "^6.0.7",
+    "husky": "^3.0.2",
+    "jest": "^24.8.0",
+    "jest-preset-angular": "^7.1.1",
+    "lint-staged": "^9.2.1",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.1",
+    "stylelint-config-recommended": "^2.2.0",
+    "ts-node": "~7.0.0",
+    "tslint": "~5.15.0",
+    "typescript": "~3.4.3"
+  }
+}
